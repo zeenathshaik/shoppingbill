@@ -1,0 +1,65 @@
+<html >
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Bill</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body><center>
+    <h1>Shopping Bill</h1><div><h2>Name:Ram</h2><h2>Contact:123446789</h2><h2>Date:2-09-23</h2> </div>
+    <table><thead>
+            <tr> <th>Item</th>
+                <th>Price ($)</th>
+                <th>Quantity</th>
+                <th>Total ($)</th>
+                <th>Select</th> </tr> </thead>
+        <tbody><tr>
+                <td>product 1</td>
+                <td>10.00</td>
+                <td><input type="number" name="quantity" value="0" min="0"></td>
+                <td class="item-total">0.00</td>
+                <td><input type="checkbox" name="item" value="10"></td>
+            </tr>
+            <tr>
+                <td>product 2</td>
+                <td>20.00</td>
+                <td><input type="number" name="quantity" value="0" min="0"></td>
+                <td class="item-total">0.00</td>
+                <td><input type="checkbox" name="item" value="20"></td>
+            </tr>
+            <tr>
+                <td>product 3</td>
+                <td>30.00</td>
+                <td><input type="number" name="quantity" value="0" min="0"></td>
+                <td class="item-total">0.00</td>
+                <td><input type="checkbox" name="item" value="20"></td>
+            </tr>
+            
+        </tbody>
+    </table>
+    <p>Total Price: $<span id="total-price">0.00</span></p>
+    <button onclick="calculateTotal()">Calculate Total</button>
+
+    <script>
+        function calculateTotal() {
+            const checkboxes = document.querySelectorAll('input[name="item"]');
+            const quantities = document.querySelectorAll('input[name="quantity"]');
+            let totalPrice = 0;
+
+            checkboxes.forEach((checkbox, index) => {
+                if (checkbox.checked) {
+                    const price = parseFloat(checkbox.value);
+                    const quantity = parseInt(quantities[index].value);
+                    const itemTotal = price * quantity;
+                    totalPrice += itemTotal;
+
+                    const itemTotalCell = document.querySelectorAll('.item-total')[index];
+                    itemTotalCell.textContent = itemTotal.toFixed(2);
+                }
+            });
+
+            document.getElementById('total-price').textContent = totalPrice.toFixed(2);
+        }
+    </script></center>
+</body>
+</html>
